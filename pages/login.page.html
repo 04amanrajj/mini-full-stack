@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/login.css" />
+    <title>welcome</title>
+  </head>
+  <body>
+    <div id="login-form">
+      <h2>login with email and password</h2>
+      <form>
+        <label for="email">Enter email</label>
+        <input id="usermail" type="text" placeholder="E-mail" required />
+        <label for="password">Enter password</label>
+        <input id="password" type="password" placeholder="password" required />
+        <input type="submit" value="Login" />
+      </form>
+    </div>
+    <div id="user-details">
+      <h2>User Information</h2>
+      <p><strong>Name:</strong> <span id="user-name"></span></p>
+      <p><strong>Email:</strong> <span id="user-email"></span></p>
+      <p><strong>Date of Birth:</strong> <span id="user-dob"></span></p>
+      <p><strong>Role:</strong> <span id="user-role"></span></p>
+      <p><strong>Location:</strong> <span id="user-location"></span></p>
+      <p><strong>Password:</strong> <span id="user-password"></span></p>
+    </div>
+  </body>
+  <script src="/global/navbar.js"></script>
+  <script src="/scripts/login.script.js"></script>
+</html>
