@@ -11,7 +11,6 @@ async function loadData() {
       },
     });
     let data = await response.json();
-    console.log(response);
     textBox.innerHTML = `
     <pre>${data.data|| "Token expired re-login to recreate token"}</pre>`;
   } catch (error) {

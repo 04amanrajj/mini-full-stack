@@ -1,22 +1,31 @@
 const { UserModel } = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 const { logger } = require("../middlewares/userLogger.middleware");
-
+const bcrypt = require("bcrypt");
 exports.homePage = (req, res) => {
   res.send("its Homepage");
 };
 
-exports.registerUser = async (req, res) => {
+exports.registerUser = (req, res) => {
   const payLoad = req.body;
   try {
     if (payLoad.password != payLoad.confirmPassword) {
-      return res.status(400).send("password did not matched");
+      return res.status(400).send("password didn't match");
     }
     if (!payLoad) {
       return res.status(400).send("fields are empty");
     }
-    const user = new UserModel(payLoad);
-    await user.save();
+    //bcrypt to secure password
+    bcrypt.hash(payLoad.password, 10, async (err, hash) => {
+      if (err) {
+        res.status(500).send({ err });
+      } else {
+        console.log({ payLoad }, payLoad.password, { hash });
+        payLoad.password = hash;
+        const user = new UserModel(payLoad);
+        await user.save();
+      }
+    });
     res.status(200).send("User registerd");
   } catch (error) {
     console.log(error.message);
@@ -27,13 +36,18 @@ exports.registerUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
   const payLoad = req.body;
   try {
-    const user = await UserModel.findOne(payLoad);
+    const user = await UserModel.findOne({email:payLoad.email});
     if (user) {
-      const token = jwt.sign(payLoad, "jsonwebtoken", { expiresIn: 120 });
-      logger.info(`${user.name} who's role is ${user.role} logged in`);
-      res
-        .status(200)
-        .send({ msg: "Logged in", token, user });
+      //bcrypt to decrypt secure password
+      bcrypt.compare(payLoad.password, user.password, (err, result) => {
+        if (result) {
+          const token = jwt.sign(payLoad, "jsonwebtoken", { expiresIn: 120 });
+          logger.info(`${user.name} who's role is ${user.role} logged in`);
+          res.status(200).send({ msg: "Logged in", token, user });
+        } else {
+          res.status(404).send({ msg: "wrong credentials" });
+        }
+      });
     } else {
       res.status(404).send({ msg: "User not found" });
       return;
