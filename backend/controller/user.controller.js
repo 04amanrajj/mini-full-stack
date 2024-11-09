@@ -4,32 +4,34 @@ const { logger } = require("../middlewares/userLogger.middleware");
 const bcrypt = require("bcrypt");
 
 exports.homePage = (req, res) => {
-  res.send("its Homepage");
+  res.send("its user Homepage");
 };
 
 exports.registerUser = (req, res) => {
+  // from details
   const payLoad = req.body;
-  // console.log(payLoad);
   try {
+    // match password
     if (payLoad.password != payLoad.confirmPassword) {
       console.log({ payLoad });
       return res.status(400).send({ msg: "password didn't match" });
     }
+    // empty from
     if (!payLoad) {
       return res.status(400).send({ msg: "fields are empty" });
     }
-    //bcrypt to secure password
+    //encrypt password
     bcrypt.hash(payLoad.password, 10, async (err, hash) => {
       if (err) {
         res.status(500).send({ err });
       } else {
-        console.log({ payLoad }, payLoad.password, { hash });
         payLoad.password = hash;
         const user = new UserModel(payLoad);
         await user.save();
       }
     });
-    res.status(200).send({msg:"User registerd"});
+    // send response
+    res.status(200).send({ msg: "User registerd" });
   } catch (error) {
     console.log(error.message);
     res.status(500).send(error.message);
@@ -37,18 +39,23 @@ exports.registerUser = (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
+  // login from data email & password
   const payLoad = req.body;
   try {
+    // finding user
     const user = await UserModel.findOne({ email: payLoad.email });
     if (user) {
-      //bcrypt to decrypt secure password
+      //decrypt password to match
       bcrypt.compare(payLoad.password, user.password, (err, result) => {
         if (result) {
-          const token = jwt.sign(payLoad, "jsonwebtoken", { expiresIn: 120 });
+          // genrate limited time token
+          const token = jwt.sign(payLoad, "jsonwebtoken", { expiresIn: 1120 });
+          // save log to file
           logger.info(`${user.name} who's role is ${user.role} logged in`);
+          // send response
           res.status(200).send({ msg: "Logged in", token, user });
         } else {
-          res.status(404).send({ msg: "wrong credentials" });
+          res.status(404).send({ msg: "Wrong" });
         }
       });
     } else {
