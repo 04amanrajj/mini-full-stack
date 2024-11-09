@@ -2,18 +2,21 @@ const { UserModel } = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 const { logger } = require("../middlewares/userLogger.middleware");
 const bcrypt = require("bcrypt");
+
 exports.homePage = (req, res) => {
   res.send("its Homepage");
 };
 
 exports.registerUser = (req, res) => {
   const payLoad = req.body;
+  // console.log(payLoad);
   try {
     if (payLoad.password != payLoad.confirmPassword) {
-      return res.status(400).send("password didn't match");
+      console.log({ payLoad });
+      return res.status(400).send({ msg: "password didn't match" });
     }
     if (!payLoad) {
-      return res.status(400).send("fields are empty");
+      return res.status(400).send({ msg: "fields are empty" });
     }
     //bcrypt to secure password
     bcrypt.hash(payLoad.password, 10, async (err, hash) => {
@@ -26,7 +29,7 @@ exports.registerUser = (req, res) => {
         await user.save();
       }
     });
-    res.status(200).send("User registerd");
+    res.status(200).send({msg:"User registerd"});
   } catch (error) {
     console.log(error.message);
     res.status(500).send(error.message);
@@ -36,7 +39,7 @@ exports.registerUser = (req, res) => {
 exports.loginUser = async (req, res) => {
   const payLoad = req.body;
   try {
-    const user = await UserModel.findOne({email:payLoad.email});
+    const user = await UserModel.findOne({ email: payLoad.email });
     if (user) {
       //bcrypt to decrypt secure password
       bcrypt.compare(payLoad.password, user.password, (err, result) => {

@@ -23,15 +23,20 @@ form.addEventListener("submit", async (e) => {
   };
 
   try {
-    await fetch(registerURL, {
+    const response = await fetch(registerURL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(obj),
     });
-    alert("New user registerd")
-    window.location.href = "/pages/login.page.html"
+    const data = await response.json();
+    if (response.ok) {
+      alert(data.msg);
+      window.location.href = "/frontend/pages/login.page.html";
+    } else {
+      alert(data.msg);
+    }
   } catch (error) {
     console.log({ error: error.message });
   }
