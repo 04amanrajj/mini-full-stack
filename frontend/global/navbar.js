@@ -34,11 +34,11 @@ document.addEventListener("DOMContentLoaded", function () {
       color: #93c5fd; 
     }
 </style>
-        <a href="/index.html">Home</a>
-        <a href="/pages/about.page.html">About</a>
-        <a id="loginTag" href="/pages/login.page.html">Login</a>
-        <a id="signupTag" href="/pages/signup.page.html">Signup</a>
-        <a href="/pages/admin.page.html">Manage</a>
+        <a href="/frontend/index.html">Home</a>
+        <a href="/frontend/pages/about.page.html">About</a>
+        <a id="loginTag" href="/frontend/pages/login.page.html">Login</a>
+        <a id="signupTag" href="/frontend/pages/signup.page.html">Signup</a>
+        <a href="/frontend/pages/admin.page.html">Manage</a>
     `;
 
   // Prepend the navbar to the body

@@ -14,6 +14,8 @@ async function loadData() {
     textBox.innerHTML = `
     <pre>${data.data|| "Token expired re-login to recreate token"}</pre>`;
   } catch (error) {
+    textBox.innerHTML = `
+    <pre>${"error code 500"}</pre>`;
     console.log({ error: error.message });
   }
 }
