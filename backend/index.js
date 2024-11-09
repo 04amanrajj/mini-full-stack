@@ -1,12 +1,12 @@
 const express = require("express");
 const app = express();
-const { appRoute } = require("./routes/app.routes");
+const { userRoute } = require("./routes/userRoutes");
 const cors = require("cors");
 const {dbconnection} = require("./configs/db");
 require("dotenv").config();
 
 app.use(cors());
-app.use("/", appRoute);
+app.use("/", userRoute);
 
 const port = process.env.PORT;
 app.listen(port, async () => {

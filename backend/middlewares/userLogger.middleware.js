@@ -5,7 +5,7 @@ exports.logger = winston.createLogger({
   format: winston.format.json(),
   transports: [
     new winston.transports.File({
-        filename:"logs/informations.log"
+        filename:"backend/logs/informations.log"
     }),
     new winston.transports.Console()],
 });
