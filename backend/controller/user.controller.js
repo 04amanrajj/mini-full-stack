@@ -53,7 +53,7 @@ exports.loginUser = async (req, res) => {
       bcrypt.compare(payLoad.password, user.password, (err, result) => {
         if (result) {
           // genrate limited time token
-          const token = jwt.sign(payLoad, "jsonwebtoken", { expiresIn: 1120 });
+          const token = jwt.sign({userID:user._id}, "jsonwebtoken"/*, { expiresIn: 1120 }*/);
           // save log to file
           logger.info(`${user.name} is logged in`);
           // send response
