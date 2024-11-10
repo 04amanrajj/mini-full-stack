@@ -4,14 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link rel="stylesheet" href="/frontend/styles/index.css" />
+    <link rel="stylesheet" href="/styles/index.css" />
   </head>
   <body>
     <div id="container">
       <div id="note-box"></div>
-      <div id="new-note-box"></div>
+      <div id="new-note-box">
+        <h1>Add Note</h1>
+        <form id="note-form">
+          <label for="note-title">Title</label>
+          <input
+            type="text"
+            id="note-title"
+            name="title"
+            placeholder="Enter title"
+            required
+          />
+
+          <label for="note-description">Description</label>
+          <textarea
+            id="note-description"
+            name="description"
+            placeholder="Enter description"
+            rows="4"
+            required
+          ></textarea>
+          <label for="note-category">Category</label>
+          <select name="category" id="note-category">
+            <option value="work">Work</option>
+            <option value="plan">Plan</option>
+            <option value="personal">Personal</option>
+            <option value="ideas">Ideas</option>
+            <option value="learning">Learning</option>
+            <option value="reminder">Reminder</option>
+            <option value="important">Important</option>
+          </select>
+
+          <button type="submit">Add Note</button>
+        </form>
+      </div>
     </div>
   </body>
-  <script src="/frontend/global/navbar.js"></script>
-  <script type="module" src="/frontend/scripts/index.js"></script>
+  <script src="/global/navbar.js"></script>
+  <script type="module" src="/scripts/index.js"></script>
 </html>
