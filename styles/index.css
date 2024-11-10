@@ -1,0 +1,29 @@
+/* CSS for Side-by-Side Boxes */
+
+#container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px; /* Space between the boxes */
+    padding: 20px;
+  }
+  
+  #note-box,
+  #new-note-box {
+    width: 48%; /* Adjust width to fit side by side */
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  #note-box {
+    min-height: 200px;
+  }
+  
+  #new-note-box {
+    min-height: 150px;
+    background-color: #f1f5f9; /* Slightly different color to distinguish */
+  }
+  
