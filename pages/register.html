@@ -3,8 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/register.css" />
     <title>Register</title>
   </head>
-  <body></body>
-  <script src="/frontend/global/navbar.js"></script>
+  <body>
+    <div class="container">
+      <h2>Register new user</h2>
+      <form>
+        <label for="name">Enter your full name</label>
+        <input id="username" type="text" placeholder="Name" required />
+
+        <label for="email">Enter your email</label>
+        <input id="usermail" type="email" required />
+
+        <label for="age">Enter your age</label>
+        <input id="age" type="number" required />
+
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="password" required />
+
+        <label for="password">Confirm password</label>
+        <input
+          id="confirm"
+          type="password"
+          placeholder="retype password"
+          required
+        />
+
+        <input type="submit" value="Register" />
+      </form>
+    </div>
+  </body>
+  <script src="/global/navbar.js"></script>
+  <script src="/scripts/register.js"></script>
 </html>
