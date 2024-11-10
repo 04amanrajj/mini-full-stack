@@ -9,8 +9,8 @@ require("dotenv").config();
 
 app.use(cors());
 app.use(express.json())
-app.use("/user", userRoute);
 app.use(authenticate);
+app.use("/user", userRoute);
 app.use("/note", noteRoute);
 
 const port = process.env.PORT;
