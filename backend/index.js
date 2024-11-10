@@ -4,11 +4,13 @@ const cors = require("cors");
 const { dbconnection } = require("./configs/db");
 const { userRoute } = require("./routes/user.routes");
 const { noteRoute } = require("./routes/note.routes");
+const { authenticate } = require("./middlewares/authentication.middleware");
 require("dotenv").config();
 
 app.use(cors());
 
 app.use("/user", userRoute);
+app.use(authenticate);
 app.use("/note", noteRoute);
 
 const port = process.env.PORT;
