@@ -1,18 +1,22 @@
 const express = require("express");
 const { Router } = require("express");
+const {
+  allNotes,
+  addNote,
+  deleteNote,
+  updateNote,
+} = require("../controller/note.controller");
 
 const noteRoute = Router();
 
 noteRoute.use(express.json());
 
-noteRoute.get("/",(req,res)=>{
+noteRoute.get("/", allNotes);
 
-});
+noteRoute.post("/", addNote);
 
-noteRoute.post("/create", );
+noteRoute.patch("/:id", updateNote);
 
-noteRoute.patch("/update:id", );
-
-noteRoute.delete("/delete:id", );
+noteRoute.delete("/:id", deleteNote);
 
 module.exports = { noteRoute };

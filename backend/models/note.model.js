@@ -4,7 +4,7 @@ const noteSchema = mongoose.Schema({
   title: { type: String, required: true },
   note: { type: String, required: true },
   category: { type: String, required: true },
-  user: String,
+  userID: String,
 });
 
 exports.NoteModel = mongoose.model("note", noteSchema);

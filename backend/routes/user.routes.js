@@ -20,8 +20,8 @@ userRoute.post("/login", loginUser);
 
 userRoute.get("/data", data);
 
-userRoute.get("/user", userData);
+userRoute.get("/everyone", userData);
 
-userRoute.delete("/delete:id", deleteUser);
+userRoute.delete("/:id", deleteUser);
 
 module.exports = { userRoute };
