@@ -4,20 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles/register.css" />
+    <link rel="stylesheet" href="/styles/navbar.css" />
+    <link rel="shortcut icon" href="/favicons/user.png" type="image/x-icon">
     <title>Register</title>
   </head>
   <body>
+    <div class="navbar-container">
+      <a href="/index.html">Home</a>
+      <a href="/pages/about.html">About</a>
+      <a id="loginTag" href="/pages/login.html">Login</a>
+      <a id="signupTag" href="/pages/register.html">Signup</a>
+    </div>
     <div class="container">
       <h2>Register new user</h2>
       <form>
         <label for="name">Enter your full name</label>
-        <input id="username" type="text" placeholder="Name" required />
+        <input id="username" type="text" placeholder="full name" required />
 
         <label for="email">Enter your email</label>
-        <input id="usermail" type="email" required />
+        <input id="usermail" type="email" placeholder="email" required />
 
         <label for="age">Enter your age</label>
-        <input id="age" type="number" required />
+        <input id="age" type="number" placeholder="age" required />
 
         <label for="password">Password</label>
         <input id="password" type="password" placeholder="password" required />
@@ -34,6 +42,6 @@
       </form>
     </div>
   </body>
-  <script src="/global/navbar.js"></script>
-  <script src="/scripts/register.js"></script>
+  <script type="module" src="/scripts/register.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </html>

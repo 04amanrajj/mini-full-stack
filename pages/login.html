@@ -4,9 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles/login.css" />
+    <link rel="stylesheet" href="/styles/navbar.css">
+    <link rel="shortcut icon" href="/favicons/user.png" type="image/x-icon">
     <title>Login</title>
   </head>
   <body>
+    <div class="navbar-container">
+      <a href="/index.html">Home</a>
+      <a href="/pages/about.html">About</a>
+      <a id="loginTag" href="/pages/login.html">Login</a>
+      <a id="signupTag" href="/pages/register.html">Signup</a>
+    </div>
     <div id="login-form">
       <h2>login with email and password</h2>
       <form>
@@ -24,6 +32,6 @@
       <p><strong>Age</strong> <span id="user-age"></span></p>
     </div>
   </body>
-  <script src="/global/navbar.js"></script>
-  <script src="/scripts/login.js"></script>
+  <script type="module" src="/scripts/login.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </html>

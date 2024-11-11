@@ -3,10 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styles/about.css" />
+    <link rel="stylesheet" href="/styles/about.css" />
+    <link rel="stylesheet" href="/styles/navbar.css" />
+    <link rel="shortcut icon" href="/favicons/note.ico" type="image/x-icon">
     <title>about</title>
   </head>
   <body>
+    <div class="navbar-container">
+      <a href="/index.html">Home</a>
+      <a href="/pages/about.html">About</a>
+      <a id="loginTag" href="/pages/login.html">Login</a>
+      <a id="signupTag" href="/pages/register.html">Signup</a>
+    </div>
     <div class="container">
       <div class="about-box">
         <h1>About This Site</h1>
@@ -30,9 +38,23 @@
             <strong>Node.js</strong> - JavaScript runtime for building the
             backend.
           </li>
+          <li>
+            <strong>Created by:</strong> -
+            <a href="https://github.com/04amanrajj/">github profile</a>
+          </li>
         </ul>
       </div>
     </div>
   </body>
-  <script src="/global/navbar.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script type="module">
+    import { navbarFunction } from "../global/utils.js";
+
+    navbarFunction();
+    document.addEventListener("DOMContentLoaded", function () {
+      const navbar = document.querySelector(".navbar-container");
+      navbar.classList.add("show");
+    });
+  </script>
 </html>
