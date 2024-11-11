@@ -1,4 +1,4 @@
-const registerURL = "http://localhost:3400/user/register";
+import { tostTopEnd,baseURL, navbarFunction } from "../global/utils.js";
 
 const form = document.querySelector("form");
 form.addEventListener("submit", async (e) => {
@@ -19,21 +19,28 @@ form.addEventListener("submit", async (e) => {
   };
 
   try {
-    let response=await fetch(registerURL, {
+    let response = await fetch(`${baseURL}/user/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(obj),
     });
-    let data=await response.json()
+    let data = await response.json();
 
-    if(!response.ok) throw new Error(data.message);
-    
-    alert("New user registerd");
-    window.location.href = "/pages/login.html";
+    if (!response.ok) throw new Error(data.message);
+
+    tostTopEnd.fire({
+      title: data.message,
+      icon: "success",
+    });
+    setTimeout(()=>window.location.href = "/pages/login.html",2000)
   } catch (error) {
-    alert(error.message)
+    tostTopEnd.fire({
+      title: error.message,
+      icon: "info",
+    });
     console.log({ error: error.message });
   }
 });
+navbarFunction();

@@ -1,4 +1,5 @@
-const loginURL = "http://localhost:3400/user/login";
+import { baseURL, navbarFunction, tostTopEnd } from "../global/utils.js";
+
 let currentUser = JSON.parse(localStorage.getItem("logged_in_user")) || null;
 document.addEventListener("DOMContentLoaded", function () {
   if (currentUser) {
@@ -21,7 +22,7 @@ form.addEventListener("submit", async (e) => {
   };
 
   try {
-    let response = await fetch(loginURL, {
+    let response = await fetch(`${baseURL}/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,20 +30,22 @@ form.addEventListener("submit", async (e) => {
       body: JSON.stringify(obj),
     });
     let data = await response.json();
-    if (response.ok) {
+    if (!response.ok) throw new Error(data.message);
+    
+
       delete data.user.password;
       currentUser = data.user;
       showUserDetails(currentUser);
       localStorage.setItem("token", data.token);
       localStorage.setItem("logged_in_user", JSON.stringify(currentUser));
-      alert("User logged in successfully");
-      // location.reload();
-      window.location.href = "/" //cause: stoping to save token in LS
-    } else {
-      alert("incorrect credentials");
-      location.reload();
-    }
+        setTimeout(()=>{window.location.href = "/";},2000);
+        
+    
   } catch (error) {
+    tostTopEnd.fire({
+      title: error.message,
+      icon: "error",
+    });
     console.log({ error: error.message });
   }
 });
@@ -60,3 +63,4 @@ function showLoginForm() {
   document.getElementById("login-form").style.display = "block";
   document.getElementById("user-details").style.display = "none";
 }
+navbarFunction()

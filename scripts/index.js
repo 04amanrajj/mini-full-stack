@@ -1,12 +1,12 @@
-// import { baseURL } from "../global/utils.js";
-const baseURL = "http://localhost:3400/note";
+import { baseURL, navbarFunction, tostTopEnd } from "../global/utils.js";
+
 const noteBox = document.getElementById("note-box");
 const token = localStorage.getItem("token");
 
 async function loadNotes() {
   noteBox.innerHTML = "";
   try {
-    let response = await fetch(baseURL, {
+    let response = await fetch(`${baseURL}/note`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
@@ -54,19 +54,26 @@ async function loadNotes() {
 // Delete note function
 async function deleteNote(noteId, noteElement) {
   try {
-    let response = await fetch(`${baseURL}/${noteId}`, {
+    const response = await fetch(`${baseURL}/note/${noteId}`, {
       method: "DELETE",
       headers: {
         Authorization: token,
       },
     });
-    response = await response.json();
+    const data = await response.json();
 
-    if (!response.ok) throw new Error(response.message);
-
+    if (!response.ok) throw new Error(data.message);
+    tostTopEnd.fire({
+      title: data.message,
+      icon: "info",
+    });
     noteElement.remove(); // Remove the note from the DOM
+    loadNotes()
   } catch (error) {
-    alert(error.message);
+    tostTopEnd.fire({
+      title: error.message,
+      icon: "error",
+    });;
     console.log({ error: error.message });
   }
 }
@@ -91,7 +98,7 @@ form.addEventListener("submit", async (e) => {
   };
 
   try {
-    let response = await fetch(baseURL, {
+    let response = await fetch(`${baseURL}/note`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -99,13 +106,21 @@ form.addEventListener("submit", async (e) => {
       },
       body: JSON.stringify(obj),
     });
+    let data = await response.json();
+    if (!response.ok) throw new Error(data.message);
 
-    if (!response.ok) throw new Error("Please login first");
-
-    alert("New note added");
+    tostTopEnd.fire({
+      title: data.message,
+      icon: "info",
+    });
     loadNotes();
   } catch (error) {
-    alert(error.message);
+    tostTopEnd.fire({
+      title: error.message,
+      icon: "error",
+    });
     console.log({ error: error.message });
   }
 });
+
+navbarFunction()
