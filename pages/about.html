@@ -5,53 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles/about.css" />
     <link rel="stylesheet" href="/styles/navbar.css" />
-    <link rel="shortcut icon" href="/favicons/note.ico" type="image/x-icon">
-    <title>about</title>
+    <link rel="shortcut icon" href="/favicons/note.ico" type="image/x-icon" />
+    <title>About</title>
   </head>
   <body>
-    <div class="navbar-container">
-      <a href="/index.html">Home</a>
-      <a href="/pages/about.html">About</a>
-      <a id="loginTag" href="/pages/login.html">Login</a>
-      <a id="signupTag" href="/pages/register.html">Signup</a>
-    </div>
-    <div class="container">
-      <div class="about-box">
+    <!-- Navbar Section -->
+    <nav class="navbar-container">
+      <a href="/index.html" title="Go to Home Page">Home</a>
+      <a
+        href="/pages/about.html"
+        aria-current="page"
+        title="Learn more about this site"
+        >About</a
+      >
+      <a id="loginTag" href="/pages/login.html" title="Log in to your account"
+        >Login</a
+      >
+      <a id="signupTag" href="/pages/register.html" title="Create a new account"
+        >Signup</a
+      >
+    </nav>
+
+    <!-- About Section -->
+    <main class="container">
+      <section class="about-box">
         <h1>About This Site</h1>
         <hr />
-        <p>This site is built using:</p>
+        <p class="info">
+          The website may take up to a minute to connect to the backend server
+          during the initial load. Tokens expire after 10 minutes, so you'll
+          need to log in again to generate new ones.
+        </p>
         <ul>
           <li>
-            <strong>MongoDB Atlas</strong> - Cloud database for storing and
-            managing data.
+            <strong>MongoDB Atlas:</strong> A cloud-based database for efficient
+            data storage and management.
           </li>
           <li>
-            <strong>Express.js</strong> - Framework for handling server requests
-            and routing.
+            <strong>Express.js:</strong> A backend framework for handling
+            server-side requests and routing.
           </li>
           <li>
-            <strong>JWT Authentication</strong> - Ensures secure user login and
+            <strong>JWT Authentication:</strong> Ensures secure user login and
             session handling.
           </li>
-          <li><strong>Bcrypt</strong> - encrypt user password.</li>
           <li>
-            <strong>Node.js</strong> - JavaScript runtime for building the
-            backend.
+            <strong>Bcrypt:</strong> Encrypts user passwords for added security.
           </li>
           <li>
-            <strong>Created by:</strong> -
-            <a href="https://github.com/04amanrajj/">github profile</a>
+            <strong>Node.js:</strong> A JavaScript runtime environment for
+            building scalable backend applications.
+          </li>
+          <li>
+            <strong>Created by:</strong>
+            <a
+              href="https://github.com/04amanrajj/"
+              target="_blank"
+              title="Visit my GitHub profile"
+              >Aman Raj</a
+            >
           </li>
         </ul>
-      </div>
-    </div>
+      </section>
+    </main>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
   <script type="module">
     import { navbarFunction } from "../global/utils.js";
 
     navbarFunction();
+
     document.addEventListener("DOMContentLoaded", function () {
       const navbar = document.querySelector(".navbar-container");
       navbar.classList.add("show");
